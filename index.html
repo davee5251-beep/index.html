@@ -42,7 +42,6 @@
             gap: 20px;
             margin-top: 20px;
             min-height: 60px;
-            /* Fontos, hogy ez ne legyen relative */
         }
 
         button {
@@ -51,7 +50,7 @@
             border-radius: 25px;
             border: none;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             font-weight: bold;
             -webkit-tap-highlight-color: transparent;
         }
@@ -70,9 +69,9 @@
         #noBtn {
             background-color: #e74c3c;
             color: white;
-            /* Nincs absolute pozíció */
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             z-index: 3;
+            min-width: 100px; /* Hogy a szöveg elférjen */
         }
 
         /* Szív animáció a kártyán */
@@ -117,15 +116,22 @@
     </div>
 
     <script>
+        const funnyTexts = ["No 😢", "Are you sure?", "Think again!", "Absolutely not?", "Wrong answer!", "Please? 🥺"];
+        let textIndex = 0;
+
         function moveButton() {
             var btn = document.getElementById("noBtn");
             
-            // Véletlenszerű margók, hogy a gomb "ugráljon"
-            var randomTop = Math.random() * 100 - 50; // -50 és 50 között
-            var randomLeft = Math.random() * 100 - 50;
+            // Nagyobb ugrások (150px)
+            var randomTop = Math.random() * 300 - 150; 
+            var randomLeft = Math.random() * 300 - 150;
             
             btn.style.marginTop = randomTop + "px";
             btn.style.marginLeft = randomLeft + "px";
+
+            // Szöveg változtatása
+            textIndex = (textIndex + 1) % funnyTexts.length;
+            btn.innerHTML = funnyTexts[textIndex];
         }
 
         function acceptProposal() {
